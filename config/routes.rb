@@ -3,6 +3,8 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :show, :create, :update, :destroy]
       resources :animals, only: [:index, :show]  # Read-only
       resources :spottings, only: [:index, :show, :create, :update, :destroy]
+
+      post "/login", to: "users#login"
     end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

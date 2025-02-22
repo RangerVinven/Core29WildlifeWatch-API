@@ -31,6 +31,18 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  # POST /login
+  def login
+    user = User.find_by(email: params[:email])
+
+    if user && user.authenticate(params[:password])
+      render json: { message: "Login successful", user: user }, status: :ok
+    else
+      render json: { error: "Invalid email or password" }, status: :unauthorized
+    end
+  end
+
+
   # DELETE /users/:id
   def destroy
     @user = User.find(params[:id])
@@ -39,6 +51,7 @@ class Api::UsersController < ApplicationController
   end
 
   private
+
 
   def user_params
     params.require(:user).permit(:username, :first_name, :last_name, :email, :password)
