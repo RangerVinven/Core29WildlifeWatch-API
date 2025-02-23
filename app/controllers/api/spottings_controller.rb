@@ -1,5 +1,6 @@
 class Api::SpottingsController < ApplicationController
   before_action :validate_spotting_params, only: [:create]
+  # before_action :authenticate_user, except: [:login, :create]
 
   # GET /spottings
   def index
